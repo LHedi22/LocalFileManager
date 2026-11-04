@@ -1,0 +1,406 @@
+┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│ FileBot 1.0.0 - manages files and folders in one workspace, locally via Ollama.                                                         │
+│ Model:     qwen2.5:1.5b                                                                                                                 │
+│ Workspace: C:\Users\lenovo\AppData\Local\Temp\filebot_smoke_166r8py4\workspace                                                          │
+│ Type 'help' for examples, 'exit' to quit.                                                                                               │
+│ Debug mode is ON.                                                                                                                       │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+you>                                                 What I can do                                                
+┌─────────────────┬─────────────────────────────────────────────────────────────────────────────────────────┐
+│ Action          │ Example                                                                                 │
+├─────────────────┼─────────────────────────────────────────────────────────────────────────────────────────┤
+│ Create a file   │ create a file called notes.txt with the text hello                                      │
+│ Create a folder │ make a folder named projects                                                            │
+│ List a folder   │ what's in the projects folder?                                                          │
+│ Read a file     │ show me notes.txt                                                                       │
+│ Edit a file     │ append 'second line' to notes.txt  /  replace the contents of notes.txt with 'new text' │
+│ Rename          │ rename notes.txt to todo.txt                                                            │
+│ Move            │ move todo.txt into projects                                                             │
+│ Copy            │ copy projects/todo.txt to backup.txt                                                    │
+│ Delete a file   │ delete backup.txt  (asks for confirmation)                                              │
+│ Delete a folder │ delete the folder projects  (asks for confirmation)                                     │
+└─────────────────┴─────────────────────────────────────────────────────────────────────────────────────────┘
+Deletes and overwrites always ask for confirmation. Type 'exit' to quit.
+you> ┌───────────────────────────────────────────────────────────────── debug ─────────────────────────────────────────────────────────────────┐
+│ model raw: {                                                                                                                            │
+│   "action": "show_capabilities",                                                                                                        │
+│   "path": "",                                                                                                                           │
+│   "destination": "",                                                                                                                    │
+│   "content": "",                                                                                                                        │
+│   "mode": ""                                                                                                                            │
+│ }                                                                                                                                       │
+│ parsed intent: {'action': 'show_capabilities', 'path': None, 'destination': None, 'content': None, 'mode': None}                        │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+                                                What I can do                                                
+┌─────────────────┬─────────────────────────────────────────────────────────────────────────────────────────┐
+│ Action          │ Example                                                                                 │
+├─────────────────┼─────────────────────────────────────────────────────────────────────────────────────────┤
+│ Create a file   │ create a file called notes.txt with the text hello                                      │
+│ Create a folder │ make a folder named projects                                                            │
+│ List a folder   │ what's in the projects folder?                                                          │
+│ Read a file     │ show me notes.txt                                                                       │
+│ Edit a file     │ append 'second line' to notes.txt  /  replace the contents of notes.txt with 'new text' │
+│ Rename          │ rename notes.txt to todo.txt                                                            │
+│ Move            │ move todo.txt into projects                                                             │
+│ Copy            │ copy projects/todo.txt to backup.txt                                                    │
+│ Delete a file   │ delete backup.txt  (asks for confirmation)                                              │
+│ Delete a folder │ delete the folder projects  (asks for confirmation)                                     │
+└─────────────────┴─────────────────────────────────────────────────────────────────────────────────────────┘
+Deletes and overwrites always ask for confirmation. Type 'exit' to quit.
+you> ┌───────────────────────────────────────────────────────────────── debug ─────────────────────────────────────────────────────────────────┐
+│ model raw: {                                                                                                                            │
+│   "action": "create_folder",                                                                                                            │
+│   "path": "projects",                                                                                                                   │
+│   "destination": "",                                                                                                                    │
+│   "content": "",                                                                                                                        │
+│   "mode": ""                                                                                                                            │
+│ }                                                                                                                                       │
+│ parsed intent: {'action': 'create_folder', 'path': 'projects', 'destination': None, 'content': None, 'mode': None}                      │
+│ final intent: {'action': 'create_folder', 'path': 'projects', 'destination': None, 'content': None, 'mode': None}                       │
+│ plan: Create folder 'projects'; confirmation required: False                                                                            │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+Created folder 'projects'.
+Suggestion: Add a README: create a file called projects/README.md
+you> ┌───────────────────────────────────────────────────────────────── debug ─────────────────────────────────────────────────────────────────┐
+│ model raw: {                                                                                                                            │
+│   "action": "create_file",                                                                                                              │
+│   "path": "projects/notes.txt",                                                                                                         │
+│   "destination": "",                                                                                                                    │
+│   "content": "hello world",                                                                                                             │
+│   "mode": ""                                                                                                                            │
+│ }                                                                                                                                       │
+│ parsed intent: {'action': 'create_file', 'path': 'projects/notes.txt', 'destination': None, 'content': 'hello world', 'mode': None}     │
+│ final intent: {'action': 'create_file', 'path': 'projects/notes.txt', 'destination': None, 'content': 'hello world', 'mode': None}      │
+│ plan: Create file 'projects/notes.txt'; confirmation required: False                                                                    │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+Created file 'projects/notes.txt' with 11 characters.
+Suggestion: Check it: read projects/notes.txt
+you> ┌───────────────────────────────────────────────────────────────── debug ─────────────────────────────────────────────────────────────────┐
+│ model raw: {                                                                                                                            │
+│   "action": "read_file",                                                                                                                │
+│   "path": "projects/notes.txt",                                                                                                         │
+│   "destination": "",                                                                                                                    │
+│   "content": "hello world",                                                                                                             │
+│   "mode": ""                                                                                                                            │
+│ }                                                                                                                                       │
+│ parsed intent: {'action': 'read_file', 'path': 'projects/notes.txt', 'destination': None, 'content': 'hello world', 'mode': None}       │
+│ final intent: {'action': 'read_file', 'path': 'projects/notes.txt', 'destination': None, 'content': None, 'mode': None}                 │
+│ plan: Read file 'projects/notes.txt'; confirmation required: False                                                                      │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+Contents of 'projects/notes.txt' 1 line:
+┌────────────────────────────────────────────────────────── projects/notes.txt ───────────────────────────────────────────────────────────┐
+│ hello world                                                                                                                             │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+Suggestion: Add a line: append 'new line' to projects/notes.txt
+you> ┌───────────────────────────────────────────────────────────────── debug ─────────────────────────────────────────────────────────────────┐
+│ model raw: {                                                                                                                            │
+│   "action": "edit_file",                                                                                                                │
+│   "path": "projects/notes.txt",                                                                                                         │
+│   "destination": "",                                                                                                                    │
+│   "content": "second line",                                                                                                             │
+│   "mode": "append"                                                                                                                      │
+│ }                                                                                                                                       │
+│ parsed intent: {'action': 'edit_file', 'path': 'projects/notes.txt', 'destination': None, 'content': 'second line', 'mode': 'append'}   │
+│ final intent: {'action': 'edit_file', 'path': 'projects/notes.txt', 'destination': None, 'content': 'second line', 'mode': 'append'}    │
+│ plan: Append text to 'projects/notes.txt'; confirmation required: False                                                                 │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+Appended 11 characters to 'projects/notes.txt'.
+Suggestion: Review the result: read projects/notes.txt
+you> ┌───────────────────────────────────────────────────────────────── debug ─────────────────────────────────────────────────────────────────┐
+│ model raw: {                                                                                                                            │
+│   "action": "edit_file",                                                                                                                │
+│   "path": "projects/notes.txt",                                                                                                         │
+│   "destination": "",                                                                                                                    │
+│   "content": "fresh start",                                                                                                             │
+│   "mode": "replace"                                                                                                                     │
+│ }                                                                                                                                       │
+│ parsed intent: {'action': 'edit_file', 'path': 'projects/notes.txt', 'destination': None, 'content': 'fresh start', 'mode': 'replace'}  │
+│ final intent: {'action': 'edit_file', 'path': 'projects/notes.txt', 'destination': None, 'content': 'fresh start', 'mode': 'replace'}   │
+│ plan: Replace contents of 'projects/notes.txt'; confirmation required: True                                                             │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────── Confirm ────────────────────────────────────────────────────────────────┐
+│ Action:  Replace contents of 'projects/notes.txt'                                                                                       │
+│ Target:  C:\Users\lenovo\AppData\Local\Temp\filebot_smoke_166r8py4\workspace\projects\notes.txt                                         │
+│                                                                                                                                         │
+│ OVERWRITE the contents of 'projects/notes.txt' (23 bytes) with 11 characters of new text? The current contents will be lost.            │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+Type 'y' or 'yes' to proceed, anything else cancels: Cancelled. Nothing was changed.
+you> ┌───────────────────────────────────────────────────────────────── debug ─────────────────────────────────────────────────────────────────┐
+│ model raw: {                                                                                                                            │
+│   "action": "edit_file",                                                                                                                │
+│   "path": "projects/notes.txt",                                                                                                         │
+│   "destination": "",                                                                                                                    │
+│   "content": "fresh start",                                                                                                             │
+│   "mode": "replace"                                                                                                                     │
+│ }                                                                                                                                       │
+│ parsed intent: {'action': 'edit_file', 'path': 'projects/notes.txt', 'destination': None, 'content': 'fresh start', 'mode': 'replace'}  │
+│ final intent: {'action': 'edit_file', 'path': 'projects/notes.txt', 'destination': None, 'content': 'fresh start', 'mode': 'replace'}   │
+│ plan: Replace contents of 'projects/notes.txt'; confirmation required: True                                                             │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────── Confirm ────────────────────────────────────────────────────────────────┐
+│ Action:  Replace contents of 'projects/notes.txt'                                                                                       │
+│ Target:  C:\Users\lenovo\AppData\Local\Temp\filebot_smoke_166r8py4\workspace\projects\notes.txt                                         │
+│                                                                                                                                         │
+│ OVERWRITE the contents of 'projects/notes.txt' (23 bytes) with 11 characters of new text? The current contents will be lost.            │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+Type 'y' or 'yes' to proceed, anything else cancels: Replaced the contents of 'projects/notes.txt'.
+Suggestion: Review the result: read projects/notes.txt
+you> ┌───────────────────────────────────────────────────────────────── debug ─────────────────────────────────────────────────────────────────┐
+│ model raw: {                                                                                                                            │
+│   "action": "list_folder",                                                                                                              │
+│   "path": "projects",                                                                                                                   │
+│   "destination": "",                                                                                                                    │
+│   "content": "",                                                                                                                        │
+│   "mode": ""                                                                                                                            │
+│ }                                                                                                                                       │
+│ parsed intent: {'action': 'list_folder', 'path': 'projects', 'destination': None, 'content': None, 'mode': None}                        │
+│ final intent: {'action': 'list_folder', 'path': 'projects', 'destination': None, 'content': None, 'mode': None}                         │
+│ plan: List folder 'projects'; confirmation required: False                                                                              │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+'projects' contains 1 file and 0 folders.
+┌───────────┬──────┬──────┐
+│ Name      │ Type │ Size │
+├───────────┼──────┼──────┤
+│ notes.txt │ file │ 11 B │
+└───────────┴──────┴──────┘
+Suggestion: Open a file: read projects/notes.txt
+you> ┌───────────────────────────────────────────────────────────────── debug ─────────────────────────────────────────────────────────────────┐
+│ model raw: {                                                                                                                            │
+│   "action": "rename_path",                                                                                                              │
+│   "path": "projects/notes.txt",                                                                                                         │
+│   "destination": "todo.txt",                                                                                                            │
+│   "content": "",                                                                                                                        │
+│   "mode": ""                                                                                                                            │
+│ }                                                                                                                                       │
+│ parsed intent: {'action': 'rename_path', 'path': 'projects/notes.txt', 'destination': 'todo.txt', 'content': None, 'mode': None}        │
+│ final intent: {'action': 'rename_path', 'path': 'projects/notes.txt', 'destination': 'todo.txt', 'content': None, 'mode': None}         │
+│ plan: Rename 'projects/notes.txt' to 'projects/todo.txt'; confirmation required: False                                                  │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+Renamed 'projects/notes.txt' to 'projects/todo.txt'.
+Suggestion: Open it: read projects/todo.txt
+you> ┌───────────────────────────────────────────────────────────────── debug ─────────────────────────────────────────────────────────────────┐
+│ model raw: {                                                                                                                            │
+│   "action": "copy_path",                                                                                                                │
+│   "path": "projects/todo.txt",                                                                                                          │
+│   "destination": "backup.txt",                                                                                                          │
+│   "content": "",                                                                                                                        │
+│   "mode": ""                                                                                                                            │
+│ }                                                                                                                                       │
+│ parsed intent: {'action': 'copy_path', 'path': 'projects/todo.txt', 'destination': 'backup.txt', 'content': None, 'mode': None}         │
+│ final intent: {'action': 'copy_path', 'path': 'projects/todo.txt', 'destination': 'backup.txt', 'content': None, 'mode': None}          │
+│ plan: Copy 'projects/todo.txt' to 'backup.txt'; confirmation required: False                                                            │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+Copied 'projects/todo.txt' to 'backup.txt'.
+Suggestion: Open it: read backup.txt
+you> ┌───────────────────────────────────────────────────────────────── debug ─────────────────────────────────────────────────────────────────┐
+│ model raw: {                                                                                                                            │
+│   "action": "move_path",                                                                                                                │
+│   "path": "backup.txt",                                                                                                                 │
+│   "destination": "projects",                                                                                                            │
+│   "content": "",                                                                                                                        │
+│   "mode": ""                                                                                                                            │
+│ }                                                                                                                                       │
+│ parsed intent: {'action': 'move_path', 'path': 'backup.txt', 'destination': 'projects', 'content': None, 'mode': None}                  │
+│ final intent: {'action': 'move_path', 'path': 'backup.txt', 'destination': 'projects', 'content': None, 'mode': None}                   │
+│ plan: Move 'backup.txt' to 'projects/backup.txt'; confirmation required: False                                                          │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+Moved 'backup.txt' to 'projects/backup.txt'.
+Suggestion: Open it: read projects/backup.txt
+you> ┌───────────────────────────────────────────────────────────────── debug ─────────────────────────────────────────────────────────────────┐
+│ model raw: {                                                                                                                            │
+│   "action": "delete_file",                                                                                                              │
+│   "path": "backup.txt",                                                                                                                 │
+│   "destination": "",                                                                                                                    │
+│   "content": "",                                                                                                                        │
+│   "mode": ""                                                                                                                            │
+│ }                                                                                                                                       │
+│ parsed intent: {'action': 'delete_file', 'path': 'backup.txt', 'destination': None, 'content': None, 'mode': None}                      │
+│ grounding path: expanded from context                                                                                                   │
+│ final intent: {'action': 'delete_file', 'path': 'projects/backup.txt', 'destination': None, 'content': None, 'mode': None}              │
+│ plan: Delete file 'projects/backup.txt'; confirmation required: True                                                                    │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────── Confirm ────────────────────────────────────────────────────────────────┐
+│ Action:  Delete file 'projects/backup.txt'                                                                                              │
+│ Target:  C:\Users\lenovo\AppData\Local\Temp\filebot_smoke_166r8py4\workspace\projects\backup.txt                                        │
+│                                                                                                                                         │
+│ Permanently DELETE file 'projects/backup.txt' (11 bytes)? This cannot be undone.                                                        │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+Type 'y' or 'yes' to proceed, anything else cancels: Deleted file 'projects/backup.txt'.
+Suggestion: See what's left: list the workspace
+you> ┌───────────────────────────────────────────────────────────────── debug ─────────────────────────────────────────────────────────────────┐
+│ model raw: {                                                                                                                            │
+│   "action": "off_topic",                                                                                                                │
+│   "path": "",                                                                                                                           │
+│   "destination": "",                                                                                                                    │
+│   "content": "",                                                                                                                        │
+│   "mode": ""                                                                                                                            │
+│ }                                                                                                                                       │
+│ parsed intent: {'action': 'off_topic', 'path': None, 'destination': None, 'content': None, 'mode': None}                                │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+I can only manage files and folders in your workspace.
+For example, you could say:
+  - create a folder named projects
+  - create a file called projects/notes.txt with the text hello
+  - list the projects folder
+  - rename projects/notes.txt to todo.txt
+you> ┌───────────────────────────────────────────────────────────────── debug ─────────────────────────────────────────────────────────────────┐
+│ model raw: {                                                                                                                            │
+│   "action": "delete_file",                                                                                                              │
+│   "path": "",                                                                                                                           │
+│   "destination": "",                                                                                                                    │
+│   "content": "",                                                                                                                        │
+│   "mode": ""                                                                                                                            │
+│ }                                                                                                                                       │
+│ parsed intent: {'action': 'delete_file', 'path': None, 'destination': None, 'content': None, 'mode': None}                              │
+│ prompt-injection / role-change pattern detected -> refused                                                                              │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+I can only manage files and folders in your workspace.
+For example, you could say:
+  - create a folder named projects
+  - create a file called projects/notes.txt with the text hello
+  - list the projects folder
+  - rename projects/notes.txt to todo.txt
+you> ┌───────────────────────────────────────────────────────────────── debug ─────────────────────────────────────────────────────────────────┐
+│ model raw: {                                                                                                                            │
+│   "action": "delete_file",                                                                                                              │
+│   "path": "",                                                                                                                           │
+│   "destination": "",                                                                                                                    │
+│   "content": "",                                                                                                                        │
+│   "mode": ""                                                                                                                            │
+│ }                                                                                                                                       │
+│ parsed intent: {'action': 'delete_file', 'path': None, 'destination': None, 'content': None, 'mode': None}                              │
+│ missing fields: ['path']                                                                                                                │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+Which file should I delete?
+you> ┌───────────────────────────────────────────────────────────────── debug ─────────────────────────────────────────────────────────────────┐
+│ model raw: {                                                                                                                            │
+│   "action": "delete_file",                                                                                                              │
+│   "path": "projects/todo.txt",                                                                                                          │
+│   "destination": "",                                                                                                                    │
+│   "content": "",                                                                                                                        │
+│   "mode": ""                                                                                                                            │
+│ }                                                                                                                                       │
+│ parsed intent: {'action': 'delete_file', 'path': 'projects/todo.txt', 'destination': None, 'content': None, 'mode': None}               │
+│ merged with pending question -> {'action': 'delete_file', 'path': 'projects/todo.txt', 'destination': None, 'content': None, 'mode':    │
+│ None}                                                                                                                                   │
+│ final intent: {'action': 'delete_file', 'path': 'projects/todo.txt', 'destination': None, 'content': None, 'mode': None}                │
+│ plan: Delete file 'projects/todo.txt'; confirmation required: True                                                                      │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────── Confirm ────────────────────────────────────────────────────────────────┐
+│ Action:  Delete file 'projects/todo.txt'                                                                                                │
+│ Target:  C:\Users\lenovo\AppData\Local\Temp\filebot_smoke_166r8py4\workspace\projects\todo.txt                                          │
+│                                                                                                                                         │
+│ Permanently DELETE file 'projects/todo.txt' (11 bytes)? This cannot be undone.                                                          │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+Type 'y' or 'yes' to proceed, anything else cancels: Cancelled. Nothing was changed.
+you> ┌───────────────────────────────────────────────────────────────── debug ─────────────────────────────────────────────────────────────────┐
+│ model raw: {                                                                                                                            │
+│   "action": "read_file",                                                                                                                │
+│   "path": "../outside/secret.txt",                                                                                                      │
+│   "destination": "",                                                                                                                    │
+│   "content": "",                                                                                                                        │
+│   "mode": ""                                                                                                                            │
+│ }                                                                                                                                       │
+│ parsed intent: {'action': 'read_file', 'path': '../outside/secret.txt', 'destination': None, 'content': None, 'mode': None}             │
+│ final intent: {'action': 'read_file', 'path': '../outside/secret.txt', 'destination': None, 'content': None, 'mode': None}              │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+Blocked: Parent-folder references ('..') are not allowed.
+you> ┌───────────────────────────────────────────────────────────────── debug ─────────────────────────────────────────────────────────────────┐
+│ model raw: {                                                                                                                            │
+│   "action": "delete_file",                                                                                                              │
+│   "path": "C:\\Users\\lenovo\\AppData\\Local\\Temp\\filebot_smoke_166r8py4\\outside\\secret.txt",                                       │
+│   "destination": "",                                                                                                                    │
+│   "content": "",                                                                                                                        │
+│   "mode": ""                                                                                                                            │
+│ }                                                                                                                                       │
+│ parsed intent: {'action': 'delete_file', 'path':                                                                                        │
+│ 'C:\\Users\\lenovo\\AppData\\Local\\Temp\\filebot_smoke_166r8py4\\outside\\secret.txt', 'destination': None, 'content': None, 'mode':   │
+│ None}                                                                                                                                   │
+│ final intent: {'action': 'delete_file', 'path': 'C:\\Users\\lenovo\\AppData\\Local\\Temp\\filebot_smoke_166r8py4\\outside\\secret.txt', │
+│ 'destination': None, 'content': None, 'mode': None}                                                                                     │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+Blocked: Absolute paths outside the workspace are not allowed.
+you> ┌───────────────────────────────────────────────────────────────── debug ─────────────────────────────────────────────────────────────────┐
+│ model raw: {                                                                                                                            │
+│   "action": "read_file",                                                                                                                │
+│   "path": "portal/secret.txt",                                                                                                          │
+│   "destination": "",                                                                                                                    │
+│   "content": "",                                                                                                                        │
+│   "mode": ""                                                                                                                            │
+│ }                                                                                                                                       │
+│ parsed intent: {'action': 'read_file', 'path': 'portal/secret.txt', 'destination': None, 'content': None, 'mode': None}                 │
+│ final intent: {'action': 'read_file', 'path': 'portal/secret.txt', 'destination': None, 'content': None, 'mode': None}                  │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+Blocked: 'portal' is a symbolic link or junction; links are not followed.
+you> ┌───────────────────────────────────────────────────────────────── debug ─────────────────────────────────────────────────────────────────┐
+│ model raw: {                                                                                                                            │
+│   "action": "create_file",                                                                                                              │
+│   "path": "CON.txt",                                                                                                                    │
+│   "destination": "",                                                                                                                    │
+│   "content": "",                                                                                                                        │
+│   "mode": ""                                                                                                                            │
+│ }                                                                                                                                       │
+│ parsed intent: {'action': 'create_file', 'path': 'CON.txt', 'destination': None, 'content': None, 'mode': None}                         │
+│ final intent: {'action': 'create_file', 'path': 'CON.txt', 'destination': None, 'content': None, 'mode': None}                          │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+Blocked: 'CON.txt' uses the reserved Windows device name 'CON'.
+you> ┌───────────────────────────────────────────────────────────────── debug ─────────────────────────────────────────────────────────────────┐
+│ model raw: {                                                                                                                            │
+│   "action": "read_file",                                                                                                                │
+│   "path": "notes.txt",                                                                                                                  │
+│   "destination": "",                                                                                                                    │
+│   "content": "",                                                                                                                        │
+│   "mode": ""                                                                                                                            │
+│ }                                                                                                                                       │
+│ parsed intent: {'action': 'read_file', 'path': 'notes.txt', 'destination': None, 'content': None, 'mode': None}                         │
+│ grounding path: kept the ':' suffix the user typed                                                                                      │
+│ final intent: {'action': 'read_file', 'path': 'notes.txt:hidden', 'destination': None, 'content': None, 'mode': None}                   │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+Blocked: 'notes.txt:hidden' contains ':' - drive letters and alternate data streams are not allowed.
+you> ┌───────────────────────────────────────────────────────────────── debug ─────────────────────────────────────────────────────────────────┐
+│ model raw: {                                                                                                                            │
+│   "action": "move_path",                                                                                                                │
+│   "path": "projects",                                                                                                                   │
+│   "destination": "..",                                                                                                                  │
+│   "content": "",                                                                                                                        │
+│   "mode": ""                                                                                                                            │
+│ }                                                                                                                                       │
+│ parsed intent: {'action': 'move_path', 'path': 'projects', 'destination': '..', 'content': None, 'mode': None}                          │
+│ final intent: {'action': 'move_path', 'path': 'projects', 'destination': '..', 'content': None, 'mode': None}                           │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+Blocked: Parent-folder references ('..') are not allowed.
+you> ┌───────────────────────────────────────────────────────────────── debug ─────────────────────────────────────────────────────────────────┐
+│ model raw: {                                                                                                                            │
+│   "action": "delete_folder",                                                                                                            │
+│   "path": "projects",                                                                                                                   │
+│   "destination": "",                                                                                                                    │
+│   "content": "",                                                                                                                        │
+│   "mode": ""                                                                                                                            │
+│ }                                                                                                                                       │
+│ parsed intent: {'action': 'delete_folder', 'path': 'projects', 'destination': None, 'content': None, 'mode': None}                      │
+│ final intent: {'action': 'delete_folder', 'path': 'projects', 'destination': None, 'content': None, 'mode': None}                       │
+│ plan: Delete folder 'projects'; confirmation required: True                                                                             │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────── Confirm ────────────────────────────────────────────────────────────────┐
+│ Action:  Delete folder 'projects'                                                                                                       │
+│ Target:  C:\Users\lenovo\AppData\Local\Temp\filebot_smoke_166r8py4\workspace\projects                                                   │
+│                                                                                                                                         │
+│ Permanently DELETE folder 'projects' and everything inside it (it contains 1 file, 0 subfolders)? This cannot be undone.                │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+Type 'y' or 'yes' to proceed, anything else cancels: Deleted folder 'projects' (it contains 1 file, 0 subfolders).
+Suggestion: See what's left: list the workspace
+you> ┌───────────────────────────────────────────────────────────────── debug ─────────────────────────────────────────────────────────────────┐
+│ model raw: {                                                                                                                            │
+│   "action": "create_folder",                                                                                                            │
+│   "path": "final_check",                                                                                                                │
+│   "destination": "",                                                                                                                    │
+│   "content": "",                                                                                                                        │
+│   "mode": ""                                                                                                                            │
+│ }                                                                                                                                       │
+│ parsed intent: {'action': 'create_folder', 'path': 'final_check', 'destination': None, 'content': None, 'mode': None}                   │
+│ final intent: {'action': 'create_folder', 'path': 'final_check', 'destination': None, 'content': None, 'mode': None}                    │
+│ plan: Create folder 'final_check'; confirmation required: False                                                                         │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+Created folder 'final_check'.
+Suggestion: Add a README: create a file called final_check/README.md
+you> Goodbye. (Nothing from this conversation was saved.)

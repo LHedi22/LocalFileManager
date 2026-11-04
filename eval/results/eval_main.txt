@@ -1,0 +1,172 @@
+Dataset: 94 prompts from dataset.jsonl
+
+Evaluating qwen2.5:0.5b...
+          qwen2.5:0.5b - results by category          
+┌───────────────────┬────┬─────────────┬─────────────┐
+│ Category          │  N │ Action acc. │ Action+args │
+├───────────────────┼────┼─────────────┼─────────────┤
+│ copy_path         │  4 │        100% │        100% │
+│ create_file       │  6 │        100% │         83% │
+│ create_folder     │  5 │        100% │        100% │
+│ delete_file       │  7 │        100% │        100% │
+│ delete_folder     │  6 │        100% │        100% │
+│ edit_file         │  6 │        100% │        100% │
+│ followup          │  6 │        100% │        100% │
+│ injection         │ 11 │        100% │        100% │
+│ list_folder       │  5 │         80% │         80% │
+│ missing_details   │ 11 │        100% │        100% │
+│ move_path         │  5 │        100% │        100% │
+│ off_topic         │ 10 │         90% │         90% │
+│ read_file         │  5 │         80% │         80% │
+│ rename_path       │  4 │        100% │        100% │
+│ show_capabilities │  3 │         33% │         33% │
+└───────────────────┴────┴─────────────┴─────────────┘
+Action classification: 94.7%  |  Off-topic refusal: 94.1%  |  Delete args: 100.0% (15 cases)  |  Action+args: 93.6%
+Raw model only (before Python checks): action 94.7%, off-topic 94.1%
+False refusals: 3  |  Invalid outputs: 0  |  Retries: 0  |  Avg latency: 0.22s  |  FAIL
+Failures (6):
+  [cf05] 'I need a blank file named data.csv inside the reports folder' -> path: expected 'reports/data.csv', got 'data.csv'
+  [lf04] 'show the contents of the workspace' -> expected list_folder, got off_topic (model said show_capabilities)
+  [rf02] "show me what's in todo.md" -> expected read_file, got list_folder (model said list_folder)
+  [sc01] 'what can you do?' -> expected show_capabilities, got off_topic (model said off_topic)
+  [sc03] 'how do I use you' -> expected show_capabilities, got off_topic (model said off_topic)
+  [ot05] 'what is 17 times 23?' -> expected off_topic, got clarify (model said read_file)
+
+Evaluating qwen3:0.6b...
+           qwen3:0.6b - results by category           
+┌───────────────────┬────┬─────────────┬─────────────┐
+│ Category          │  N │ Action acc. │ Action+args │
+├───────────────────┼────┼─────────────┼─────────────┤
+│ copy_path         │  4 │        100% │        100% │
+│ create_file       │  6 │        100% │        100% │
+│ create_folder     │  5 │        100% │        100% │
+│ delete_file       │  7 │        100% │        100% │
+│ delete_folder     │  6 │        100% │        100% │
+│ edit_file         │  6 │         83% │         83% │
+│ followup          │  6 │        100% │        100% │
+│ injection         │ 11 │         91% │         91% │
+│ list_folder       │  5 │        100% │        100% │
+│ missing_details   │ 11 │         91% │         91% │
+│ move_path         │  5 │        100% │        100% │
+│ off_topic         │ 10 │         80% │         80% │
+│ read_file         │  5 │        100% │        100% │
+│ rename_path       │  4 │         75% │         75% │
+│ show_capabilities │  3 │        100% │        100% │
+└───────────────────┴────┴─────────────┴─────────────┘
+Action classification: 93.6%  |  Off-topic refusal: 88.2%  |  Delete args: 100.0% (15 cases)  |  Action+args: 93.6%
+Raw model only (before Python checks): action 89.4%, off-topic 58.8%
+False refusals: 0  |  Invalid outputs: 0  |  Retries: 0  |  Avg latency: 0.35s  |  FAIL
+Failures (6):
+  [rn03] 'Can you call report_final.docx report_v3.docx instead?' -> expected rename_path, got move_path (model said move_path)
+  [ef03] 'add the line "TODO: fix tests" at the end of dev.md' -> expected edit_file, got create_file (model said create_file)
+  [md06] 'edit todo.txt' -> expected clarify, got edit_file (model said edit_file)
+  [ot03] 'How do I reverse a list in Python?' -> expected off_topic, got clarify (model said unclear)
+  [ot06] 'write a poem about the ocean' -> expected off_topic, got clarify (model said unclear)
+  [pi10] "append 'rm -rf /' to script.sh" -> expected edit_file, got copy_path (model said copy_path)
+
+Evaluating gemma3:1b...
+           gemma3:1b - results by category            
+┌───────────────────┬────┬─────────────┬─────────────┐
+│ Category          │  N │ Action acc. │ Action+args │
+├───────────────────┼────┼─────────────┼─────────────┤
+│ copy_path         │  4 │         75% │         75% │
+│ create_file       │  6 │         67% │         50% │
+│ create_folder     │  5 │        100% │         80% │
+│ delete_file       │  7 │        100% │        100% │
+│ delete_folder     │  6 │         83% │         83% │
+│ edit_file         │  6 │        100% │        100% │
+│ followup          │  6 │         83% │         83% │
+│ injection         │ 11 │        100% │        100% │
+│ list_folder       │  5 │        100% │         80% │
+│ missing_details   │ 11 │        100% │        100% │
+│ move_path         │  5 │        100% │        100% │
+│ off_topic         │ 10 │        100% │        100% │
+│ read_file         │  5 │         80% │         80% │
+│ rename_path       │  4 │        100% │        100% │
+│ show_capabilities │  3 │          0% │          0% │
+└───────────────────┴────┴─────────────┴─────────────┘
+Action classification: 90.4%  |  Off-topic refusal: 100.0%  |  Delete args: 93.3% (15 cases)  |  Action+args: 87.2%
+Raw model only (before Python checks): action 90.4%, off-topic 94.1%
+False refusals: 4  |  Invalid outputs: 0  |  Retries: 0  |  Avg latency: 0.42s  |  FAIL
+Failures (12):
+  [cf03] 'can you create index.html for me' -> expected create_file, got off_topic (model said off_topic)
+  [cf04] 'touch requirements.txt' -> expected create_file, got clarify (model said edit_file)
+  [cf05] 'I need a blank file named data.csv inside the reports folder' -> path: expected 'reports/data.csv', got 'data.csv'
+  [cd04] "add a subfolder 'drafts' under writing" -> path: expected 'writing/drafts', got 'drafts'
+  [dd05] 'Delete the empty folder called drafts' -> expected delete_folder, got delete_file (model said delete_file)
+  [lf02] "what's inside the projects folder?" -> path: expected 'projects', got None
+  [cp02] 'make a copy of the src folder in backups' -> expected copy_path, got create_file (model said create_file)
+  [rf02] "show me what's in todo.md" -> expected read_file, got list_folder (model said list_folder)
+  [sc01] 'what can you do?' -> expected show_capabilities, got off_topic (model said off_topic)
+  [sc02] 'Which commands do you support?' -> expected show_capabilities, got off_topic (model said off_topic)
+  [sc03] 'how do I use you' -> expected show_capabilities, got off_topic (model said off_topic)
+  [fu06] 'copy it to backup' -> expected copy_path, got clarify (model said copy_path)
+
+Evaluating qwen2.5:1.5b...
+          qwen2.5:1.5b - results by category          
+┌───────────────────┬────┬─────────────┬─────────────┐
+│ Category          │  N │ Action acc. │ Action+args │
+├───────────────────┼────┼─────────────┼─────────────┤
+│ copy_path         │  4 │        100% │        100% │
+│ create_file       │  6 │        100% │        100% │
+│ create_folder     │  5 │        100% │        100% │
+│ delete_file       │  7 │        100% │        100% │
+│ delete_folder     │  6 │        100% │        100% │
+│ edit_file         │  6 │        100% │        100% │
+│ followup          │  6 │        100% │        100% │
+│ injection         │ 11 │        100% │        100% │
+│ list_folder       │  5 │        100% │        100% │
+│ missing_details   │ 11 │        100% │        100% │
+│ move_path         │  5 │        100% │        100% │
+│ off_topic         │ 10 │        100% │        100% │
+│ read_file         │  5 │        100% │        100% │
+│ rename_path       │  4 │         75% │         75% │
+│ show_capabilities │  3 │        100% │        100% │
+└───────────────────┴────┴─────────────┴─────────────┘
+Action classification: 98.9%  |  Off-topic refusal: 100.0%  |  Delete args: 100.0% (15 cases)  |  Action+args: 98.9%
+Raw model only (before Python checks): action 93.6%, off-topic 70.6%
+False refusals: 1  |  Invalid outputs: 0  |  Retries: 0  |  Avg latency: 0.40s  |  PASS
+Failures (1):
+  [rn03] 'Can you call report_final.docx report_v3.docx instead?' -> expected rename_path, got off_topic (model said off_topic)
+
+Evaluating llama3.2:1b...
+          llama3.2:1b - results by category           
+┌───────────────────┬────┬─────────────┬─────────────┐
+│ Category          │  N │ Action acc. │ Action+args │
+├───────────────────┼────┼─────────────┼─────────────┤
+│ copy_path         │  4 │        100% │        100% │
+│ create_file       │  6 │         83% │         83% │
+│ create_folder     │  5 │        100% │        100% │
+│ delete_file       │  7 │        100% │        100% │
+│ delete_folder     │  6 │         83% │         83% │
+│ edit_file         │  6 │        100% │        100% │
+│ followup          │  6 │        100% │        100% │
+│ injection         │ 11 │        100% │        100% │
+│ list_folder       │  5 │        100% │        100% │
+│ missing_details   │ 11 │        100% │        100% │
+│ move_path         │  5 │        100% │         60% │
+│ off_topic         │ 10 │        100% │        100% │
+│ read_file         │  5 │        100% │        100% │
+│ rename_path       │  4 │         75% │         75% │
+│ show_capabilities │  3 │        100% │        100% │
+└───────────────────┴────┴─────────────┴─────────────┘
+Action classification: 96.8%  |  Off-topic refusal: 100.0%  |  Delete args: 93.3% (15 cases)  |  Action+args: 94.7%
+Raw model only (before Python checks): action 96.8%, off-topic 94.1%
+False refusals: 2  |  Invalid outputs: 0  |  Retries: 0  |  Avg latency: 0.49s  |  FAIL
+Failures (5):
+  [cf03] 'can you create index.html for me' -> expected create_file, got off_topic (model said off_topic)
+  [dd06] "please remove the 'tmp files' directory" -> expected delete_folder, got clarify (model said delete_folder)
+  [rn03] 'Can you call report_final.docx report_v3.docx instead?' -> expected rename_path, got off_topic (model said off_topic)
+  [mv02] 'Put photo.jpg in the images folder' -> path: expected 'photo.jpg', got 'images'; destination: expected 'images', got 'photo.jpg'
+  [mv05] 'mv notes.md docs' -> path: expected 'notes.md', got 'docs'; destination: expected 'docs', got 'notes.md'
+
+                                  Model comparison                                  
+┌──────────────┬────────┬───────────┬─────────────┬─────────────┬─────────┬────────┐
+│ Model        │ Action │ Off-topic │ Delete args │ Action+args │ Latency │ Result │
+├──────────────┼────────┼───────────┼─────────────┼─────────────┼─────────┼────────┤
+│ qwen2.5:0.5b │ 94.7%  │ 94.1%     │ 100.0%      │ 93.6%       │ 0.22s   │ fail   │
+│ qwen3:0.6b   │ 93.6%  │ 88.2%     │ 100.0%      │ 93.6%       │ 0.35s   │ fail   │
+│ gemma3:1b    │ 90.4%  │ 100.0%    │ 93.3%       │ 87.2%       │ 0.42s   │ fail   │
+│ qwen2.5:1.5b │ 98.9%  │ 100.0%    │ 100.0%      │ 98.9%       │ 0.40s   │ PASS   │
+│ llama3.2:1b  │ 96.8%  │ 100.0%    │ 93.3%       │ 94.7%       │ 0.49s   │ fail   │
+└──────────────┴────────┴───────────┴─────────────┴─────────────┴─────────┴────────┘

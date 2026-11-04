@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+
+# The default workspace holds the user's own files
+workspace/
+
+# Local overrides
+.env
+filebot.local.toml
+
+# Editors / OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store

@@ -1,0 +1,69 @@
+Dataset: 36 prompts from holdout.jsonl
+
+Evaluating qwen2.5:0.5b...
+         qwen2.5:0.5b - results by category          
+┌───────────────────┬───┬─────────────┬─────────────┐
+│ Category          │ N │ Action acc. │ Action+args │
+├───────────────────┼───┼─────────────┼─────────────┤
+│ copy_path         │ 2 │         50% │         50% │
+│ create_file       │ 3 │        100% │         67% │
+│ create_folder     │ 2 │        100% │        100% │
+│ delete_file       │ 3 │         67% │         67% │
+│ delete_folder     │ 2 │        100% │        100% │
+│ edit_file         │ 2 │        100% │        100% │
+│ followup          │ 3 │        100% │        100% │
+│ injection         │ 3 │        100% │        100% │
+│ list_folder       │ 2 │         50% │         50% │
+│ missing_details   │ 3 │        100% │        100% │
+│ move_path         │ 2 │        100% │         50% │
+│ off_topic         │ 4 │         75% │         75% │
+│ read_file         │ 2 │        100% │        100% │
+│ rename_path       │ 2 │        100% │        100% │
+│ show_capabilities │ 1 │          0% │          0% │
+└───────────────────┴───┴─────────────┴─────────────┘
+Action classification: 86.1%  |  Off-topic refusal: 83.3%  |  Delete args: 83.3% (6 cases)  |  Action+args: 80.6%
+Raw model only (before Python checks): action 86.1%, off-topic 83.3%
+False refusals: 3  |  Invalid outputs: 0  |  Retries: 0  |  Avg latency: 0.45s  |  FAIL
+Failures (7):
+  [h03] 'generate an empty .env file' -> path: expected '.env', got 'empty'
+  [h04] 'nuke temp.log' -> expected delete_file, got off_topic (model said off_topic)
+  [h11] 'dir' -> expected list_folder, got off_topic (model said off_topic)
+  [h16] 'please move school/math into archive' -> path: expected 'school/math', got 'school'
+  [h18] 'back up data.json as data.json.bak' -> expected copy_path, got rename_path (model said rename_path)
+  [h23] 'help me, what are your features?' -> expected show_capabilities, got off_topic (model said off_topic)
+  [h29] 'fix this bug: TypeError: undefined is not a function' -> expected off_topic, got edit_file (model said edit_file)
+
+Evaluating qwen2.5:1.5b...
+         qwen2.5:1.5b - results by category          
+┌───────────────────┬───┬─────────────┬─────────────┐
+│ Category          │ N │ Action acc. │ Action+args │
+├───────────────────┼───┼─────────────┼─────────────┤
+│ copy_path         │ 2 │        100% │        100% │
+│ create_file       │ 3 │        100% │        100% │
+│ create_folder     │ 2 │        100% │        100% │
+│ delete_file       │ 3 │        100% │        100% │
+│ delete_folder     │ 2 │        100% │        100% │
+│ edit_file         │ 2 │        100% │        100% │
+│ followup          │ 3 │        100% │        100% │
+│ injection         │ 3 │        100% │        100% │
+│ list_folder       │ 2 │        100% │        100% │
+│ missing_details   │ 3 │         67% │         67% │
+│ move_path         │ 2 │        100% │        100% │
+│ off_topic         │ 4 │        100% │        100% │
+│ read_file         │ 2 │        100% │        100% │
+│ rename_path       │ 2 │        100% │        100% │
+│ show_capabilities │ 1 │        100% │        100% │
+└───────────────────┴───┴─────────────┴─────────────┘
+Action classification: 97.2%  |  Off-topic refusal: 100.0%  |  Delete args: 100.0% (6 cases)  |  Action+args: 97.2%
+Raw model only (before Python checks): action 94.4%, off-topic 83.3%
+False refusals: 1  |  Invalid outputs: 0  |  Retries: 0  |  Avg latency: 0.40s  |  PASS
+Failures (1):
+  [h26] 'copy music' -> expected clarify, got off_topic (model said off_topic)
+
+                                  Model comparison                                  
+┌──────────────┬────────┬───────────┬─────────────┬─────────────┬─────────┬────────┐
+│ Model        │ Action │ Off-topic │ Delete args │ Action+args │ Latency │ Result │
+├──────────────┼────────┼───────────┼─────────────┼─────────────┼─────────┼────────┤
+│ qwen2.5:0.5b │ 86.1%  │ 83.3%     │ 83.3%       │ 80.6%       │ 0.45s   │ fail   │
+│ qwen2.5:1.5b │ 97.2%  │ 100.0%    │ 100.0%      │ 97.2%       │ 0.40s   │ PASS   │
+└──────────────┴────────┴───────────┴─────────────┴─────────────┴─────────┴────────┘

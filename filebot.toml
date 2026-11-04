@@ -1,0 +1,8 @@
+# FileBot configuration. Environment variables and CLI flags override these values.
+#   FILEBOT_MODEL, OLLAMA_HOST, FILEBOT_WORKSPACE, FILEBOT_MAX_READ_BYTES, FILEBOT_TIMEOUT
+[filebot]
+model = "qwen2.5:1.5b"            # smallest model that passed the evaluation (986 MB)
+ollama_host = "http://localhost:11434"
+workspace = "workspace"            # relative to this file
+max_read_bytes = 1048576           # 1 MB limit for reading/editing text files
+request_timeout = 120              # seconds per model call
